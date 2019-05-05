@@ -3,10 +3,10 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- 条件语句 -->
-    <p v-if="showName">{{name}}</p>
+    <!-- <p v-if="showName">{{name}}</p>
     <p>
       <input type="text" v-model="text">
-    </p>
+    </p> -->
         <!-- 循环语句 -->
     <!-- <ul>
       <li v-for="(good, index) in goods" :key="good.id">
@@ -15,10 +15,24 @@
         <button @click="addGood(index)">加购物车</button>
       </li>
     </ul> -->
-    <el-button>odjdj</el-button>
+  
     
       <!-- 购物车 -->
-    <cart :name="name"></cart>
+    <!-- <cart :name="name"></cart> -->
+    <!-- solt使用 -->
+    <child>
+     <template slot="head">
+        <h3>window</h3>
+      </template>
+      content...
+      <template slot="foot">
+        <button>确定</button>
+      </template>
+      </child>
+    <!-- elelemt按需使用 -->
+      <el-button>odjdj</el-button>
+      <!-- 自定义组件使用 -->
+      <k-button @lalala="handleClick"></k-button>
   </div>
 </template>
 
@@ -26,10 +40,14 @@
 // import HelloWorld from "./components/HelloWorld.vue";
 import Cart from "./components/Cart.vue";
 import axios from "axios";
+import KButton from './components/Button.vue';
+import  Child from './components/solt.vue';
 export default {
   name: "app",
    components: {
-    Cart
+    Cart,
+     KButton,
+     Child
   },
   data() {
     return {
@@ -67,6 +85,10 @@ export default {
       const good = this.goods[i];
       this.$bus.$emit("addCart", good);
       // this.$root.$emit('addCart', good)
+    },
+     handleClick(obj){
+      console.log(obj);
+      
     }
   },
  

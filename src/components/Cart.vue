@@ -84,13 +84,20 @@ export default {
     },
     total() {
       //计算激活项总价
-      let num = 0;
-      this.cart.forEach(c => {
+    //   let num = 0;
+    //   this.cart.forEach(c => {
+    //     if (c.active) {
+    //       num += c.price * c.count;
+    //     }
+    //   });
+    //   return num;
+   return 
+      this.cart.reduce((sum,c)=> {
         if (c.active) {
-          num += c.price * c.count;
+          sum += c.price * c.count;
         }
-      });
-      return num;
+      },0);
+    
     }
   }
 }
