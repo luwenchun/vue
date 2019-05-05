@@ -34,12 +34,12 @@ const router = new Router({
           children: [
             { path: "static", component: Page1, props: { foo: "bar" } }, // 给组件传静态值
             { path: "page1/:foo", component: Page1, props: true }, // 将route.params
-            // {
-            //   path: "page2/:id/:msg",
-            //   name: "page2",
-            //   component: Page2,
-            //   props: func
-            // }
+            {
+              path: "page2/:id/:msg",
+              name: "page2",
+              component: Page2,
+              props: func
+            }
           ]
         },
         { path: "/login", name: "login", component: Login }

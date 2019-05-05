@@ -23,7 +23,7 @@ export default {
   methods: {
     gotoPage2() {
       // this.$router.push('/page2/1/vuejs');
-      this.$router.push({ name: "page2", params: { id: 1, msg: "vuejs" } });
+      this.$router.push({ name: "page2", params: { id: 1, msg: "vuejs" } ,query:{id:'1'}});
     }
   },
 //   beforeRouteEnter(to, from, next) {

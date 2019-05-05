@@ -38,7 +38,7 @@
    
     <!-- 路由导航 -->
     <router-link to="/dashboard/static">Static</router-link> | 
-    <router-link to="/dashboard/page1/bar1111">Page1</router-link> | 
+    <router-link to="/dashboard/page1/bar1111ididi">Page1</router-link> | 
     <router-link to="/dashboard/page2/1/vuejs?foo=bar">page2</router-link>  | 
     <router-link to="/login">login</router-link>  | 
 

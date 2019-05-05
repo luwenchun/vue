@@ -17,6 +17,7 @@
         props: ['id','msg','foo'],
         created(){
             console.log(this.$route.params.msg);
+            debugger
             // 查询参
             console.log(this.$route.query.foo);
             
