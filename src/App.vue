@@ -33,6 +33,8 @@
       <el-button>odjdj</el-button>
       <!-- 自定义组件使用 -->
       <k-button @lalala="handleClick"></k-button>
+      <!-- 自定义高阶组件 -->
+       <form-test :title="titleVar"></form-test>
   </div>
 </template>
 
@@ -42,15 +44,18 @@ import Cart from "./components/Cart.vue";
 import axios from "axios";
 import KButton from './components/Button.vue';
 import  Child from './components/solt.vue';
+import FormTest from './components/FormTest.vue';
 export default {
   name: "app",
    components: {
     Cart,
      KButton,
-     Child
+     Child,
+         FormTest,
   },
   data() {
     return {
+        titleVar:'element表单，rules校验规则',
       name: "开课吧购物车",
       showName: false,
       goods: [],
