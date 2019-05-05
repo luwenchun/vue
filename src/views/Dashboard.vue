@@ -13,7 +13,32 @@
 
 <script>
     import {mapState,mapGetters,mapMutations,mapActions} from 'vuex';
+// 1. 配置
 
+//    ```
+//    {
+//    	state:{}
+//    	mutations:{}
+//    	getters:{}
+//    	actions:{}
+//    }
+//    ```
+
+// 2. 使用
+
+//    - store.state.xx
+//    - store.getters.xx
+//    - store.commit(xxx)
+//    - store.dispatch(xxx)
+
+// 3. 帮助方法
+
+//    - mapState
+//    - mapGetters
+//    - mapMutations
+//    - mapActions
+
+// 4. 模块化
     export default {
         methods: {
             ...mapMutations(['increase']),
