@@ -20,7 +20,7 @@
       <!-- 购物车 -->
     <!-- <cart :name="name"></cart> -->
     <!-- solt使用 -->
-    <child>
+    <!-- <child>
      <template slot="head">
         <h3>window</h3>
       </template>
@@ -28,13 +28,23 @@
       <template slot="foot">
         <button>确定</button>
       </template>
-      </child>
+      </child> -->
     <!-- elelemt按需使用 -->
-      <el-button>odjdj</el-button>
+      <!-- <el-button>odjdj</el-button> -->
       <!-- 自定义组件使用 -->
-      <k-button @lalala="handleClick"></k-button>
+      <!-- <k-button @lalala="handleClick"></k-button> -->
       <!-- 自定义高阶组件 -->
-       <form-test :title="titleVar"></form-test>
+       <!-- <form-test :title="titleVar"></form-test> -->
+   
+    <!-- 路由导航 -->
+    <router-link to="/dashboard/static">Static</router-link> | 
+    <router-link to="/dashboard/page1/bar">Page1</router-link> | 
+    <router-link to="/dashboard/page2/1/vuejs?foo=bar">page2</router-link>  | 
+    <router-link to="/login">login</router-link>  | 
+
+    <!-- 路由出口 -->
+    <router-view></router-view>
+
   </div>
 </template>
 
