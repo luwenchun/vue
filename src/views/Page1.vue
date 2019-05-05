@@ -26,13 +26,13 @@ export default {
       this.$router.push({ name: "page2", params: { id: 1, msg: "vuejs" } ,query:{id:'1'}});
     }
   },
-//   beforeRouteEnter(to, from, next) {
-//     if (window.isLogin) {
-//       next();
-//     } else {
-//       next("/login?redirect=" + to.path);
-//     }
-//   }
+  // beforeRouteEnter(to, from, next) {
+  //   if (window.isLogin) {
+  //     next();
+  //   } else {
+  //     next("/login?redirect=" + to.path);
+  //   }
+  // }
     // beforeRouteUpdate(to,from,next){
     //     // 仅路由参数发生变化时触发，比如 /page/vue  /page/react
     //     next()
