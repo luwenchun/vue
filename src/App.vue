@@ -8,13 +8,15 @@
       <input type="text" v-model="text">
     </p>
         <!-- 循环语句 -->
-    <ul>
+    <!-- <ul>
       <li v-for="(good, index) in goods" :key="good.id">
         <span>{{good.text}}</span>
         <span>￥{{good.price}}</span>
         <button @click="addGood(index)">加购物车</button>
       </li>
-    </ul>
+    </ul> -->
+    <el-button>odjdj</el-button>
+    
       <!-- 购物车 -->
     <cart :name="name"></cart>
   </div>
