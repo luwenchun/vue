@@ -1,51 +1,72 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Axios from "axios";
 
-// 挂载插件
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    count: 1000000,
-    isLogin: false // 登录状态
+    token: localStorage.getItem("token") || "",
+    cart: JSON.parse(localStorage.getItem("cart")) || []
   },
   mutations: {
-    // 修改数据
-    increase(state) {
-      state.count += 1;
+    setToken(state, token) {
+      state.token = token;
+      localStorage.setItem("token", JSON.stringify(state.token));
     },
-    login(state) {
-      state.isLogin = true;
+    addCart(state, item) {
+      const good = state.cart.find(v => v.id == item.id);
+      if (good) {
+        good.cartCount += 1;
+      } else {
+        state.cart.push({
+          ...item,
+          cartCount: 1
+        });
+      }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
-    logout(state) {
-      state.isLogin = false;
+    countMinus(state, index) {
+      debugger
+      const item = state.cart[index];
+      if (item.cartCount > 1) {
+        item.cartCount -= 1;
+      } else {
+        state.cart.splice(index, 1);
+      }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    countAdd(state,index) {
+      debugger
+      state.cart[index].cartCount += 1;
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     }
   },
+  actions: {},
   getters: {
-    // 对state中的数据进行加工处理
-    money: state => {
-      return state.count + "元";
-    }
-  },
-  actions: {
-    // 异步操作时使用
-    increaseAsync({ state, commit }, payload) {
-      setTimeout(() => {
-        commit("increase");
-      }, 1000);
+    isLogin: state => {
+      return !!state.token; // 转换为布尔值
     },
-    submitLogin({commit},payload){
-      // return axios.post('/api/login').then(resp=>{
-      //   resp.data.result
-      // })
-      return new Promise(resolve => {
-        setTimeout(() => {
-          commit('login');
-          resolve(true);
-        }, 2000);
-      })
-      
-    }
+    cartTotal: state => { // 计算购物车中项目总数
+      let num = 0;
+      state.cart.forEach(v => {
+        num += v.cartCount;
+      });
+      return num;
+    },
+    total: state => state.cart.reduce((num,v) => num += v.cartCount*v.price, 0)
   }
 });
+
+// 订阅store变化
+// store.subscribe((mutation, state) => {
+//   switch (mutation.type) {
+//     case "setToken":
+//     localStorage.setItem("token", JSON.stringify(state.token));
+//       break;
+//     case "addCart":
+//       localStorage.setItem("cart", JSON.stringify(state.cart));
+//       break;
+//   }
+// });
+
+export default store;

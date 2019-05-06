@@ -1,14 +1,17 @@
 import Vue from 'vue'
+import './cube-ui'
 import App from './App.vue'
-import './plugins/element.js'
-import router from "./router"
+import router from './router'
 import store from './store'
+import axios from 'axios'
+import interceptor from './http-interceptor'
+
 Vue.config.productionTip = false
-// 修改Vue原型
-Vue.prototype.$bus = new Vue();
+
+Vue.prototype.$http = axios;
+
 new Vue({
   router,
   store,
-  render: h => h(App),
- 
+  render: h => h(App)
 }).$mount('#app')

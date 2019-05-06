@@ -1,66 +1,60 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home.vue";
-import Page1 from "@/views/Page1.vue";
-import Page2 from "@/views/Page2.vue";
-import Dashboard from "@/views/Dashboard.vue";
-import Login from "@/views/Login.vue";
-import store from "./store";
-// 插件挂载
-Vue.use(Router);
-function func({ params, query }) {
-    return {
-      id: params.id,
-      msg: params.msg,
-      foo: query.foo
-    };
-  }
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from './views/Home.vue'
+import Login from './views/Login.vue'
+import Cart from './views/Cart.vue'
+import store from './store'
 
+Vue.use(Router)
 
 const router = new Router({
-    mode: "history",
-    routes: [
-        { path: "/", redirect: "/dashboard/page1" },
-        {
-          path: "/dashboard",
-          component: Dashboard,
-          // beforeEnter(to,from,next){
-          //   if (store.state.isLogin) {
-          //     next();
-          //   } else {
-          //     next('/login?redirect='+to.path);
-          //   }
-          // },
-          children: [
-            { path: "static", component: Page1, props: { foo: "bar" } }, // 给组件传静态值
-            { path: "page1/:foo", component: Page1, props: true }, // 将route.params
-            {
-              path: "page2/:id/:msg",
-              name: "page2",
-              component: Page2,
-              props: func
-            }
-          ]
-        },
-        { path: "/login", name: "login", component: Login }
-      ]
-})
-// 全局路由守卫
-router.beforeEach((to,from,next)=>{
-    console.log(to);
-    if (to.path.indexOf('/dashboard')!=-1) { // 要求登录
-      if (store.state.isLogin) {
-        next();
-      } else {
-        next('/login?redirect='+to.path);
-      }
-    } else {
-      next();
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },    
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
+    },
+    {
+      path: '/about',
+      name: 'about',
+      meta: {auth: true},
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
+  ]
+});
+
+// 守卫
+router.beforeEach((to,from,next) => {
+
+  if (to.path.indexOf("cart")!='-1') { // 查看路由是否需要登录
+    // 需要认证，则检查令牌
+    // store.state.token
+    if (true) { // 已登录
+      next();
+    } else {// 去登陆      
+      next({
+        path: '/login',
+        query: {redirect: to.path}
+      })
+    }
+  } else {
     next();
-  })
-  router.afterEach((to,from)=>{
-  
-  })
-  export default router;
-  
+  }
+})
+
+export default router;
