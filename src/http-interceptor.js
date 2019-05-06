@@ -20,7 +20,7 @@ axios.interceptors.response.use(
       const data = response.data;
       if (data.code == -1) {
         clearHandler()
-        debugger
+       
       }
     }
     return response;

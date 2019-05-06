@@ -26,7 +26,7 @@ const store = new Vuex.Store({
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     countMinus(state, index) {
-      debugger
+      
       const item = state.cart[index];
       if (item.cartCount > 1) {
         item.cartCount -= 1;
@@ -36,7 +36,7 @@ const store = new Vuex.Store({
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     countAdd(state,index) {
-      debugger
+      
       state.cart[index].cartCount += 1;
       localStorage.setItem("cart", JSON.stringify(state.cart));
     }
