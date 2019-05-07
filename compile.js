@@ -5,7 +5,6 @@ class Compile {
   constructor(el, vm) {
     this.$vm = vm;
     this.$el = document.querySelector(el); // 默认选择器
-
     if (this.$el) {
       // 将dom节点转换为Fragment提高执行效率
       this.$fragment = this.node2Fragment(this.$el);
@@ -116,14 +115,18 @@ class Compile {
 
   // 更新
   update(node, vm, exp, dir) {
+      
     let updaterFn = this[dir + "Updater"];
     updaterFn && updaterFn(node, vm[exp]); // 执行更新，get
+  
     new Watcher(vm, exp, function(value) {
+      
       updaterFn && updaterFn(node, value);
     });
   }
 
   textUpdater(node, value) {
+      debugger
     node.textContent = value;
   }
   htmlUpdater(node, value) {
